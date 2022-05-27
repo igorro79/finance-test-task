@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import operations from './finance-operations';
-
 const initialState = {
   data: null,
+  interval: 5,
 };
 
 const financeSlice = createSlice({
@@ -12,7 +11,10 @@ const financeSlice = createSlice({
     updateData(state, { payload }) {
       state.data = payload;
     },
+    updateInterval(state, { payload }) {
+      state.interval = payload;
+    },
   },
 });
-export const { updateData, show } = financeSlice.actions;
+export const { updateData, updateInterval } = financeSlice.actions;
 export default financeSlice.reducer;
