@@ -4,9 +4,7 @@ import financeSlice from './finance-slice';
 // import filtersReducer from './features/filters/filtersSlice';
 
 const store = configureStore({
-  reducer: {
-    finance: financeSlice,
-  },
+  reducer: financeSlice,
 });
 
 export default store;

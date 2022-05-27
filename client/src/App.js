@@ -1,12 +1,8 @@
 import './App.css';
-import { io } from 'socket.io-client';
+import Dashboard from './components/dashboard';
 
-const socket = io('http://localhost:4000');
-socket.on('ticker', (data) => {
-  console.log(data);
-});
 function App() {
-  return <div className="App"></div>;
+  return <Dashboard></Dashboard>;
 }
 
 export default App;

@@ -12,6 +12,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^8.0.2",
     "react-scripts": "4.0.3",
+    "styled-components": "^5.3.5",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -19,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"cd ../server && npm run start\" \"npm run start\""
+    "dev": "concurrently --kill-others \"cd ../server && npm run dev\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [
