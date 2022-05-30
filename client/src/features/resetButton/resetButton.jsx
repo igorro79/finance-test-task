@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Button = styled.button`
+export const Button = styled.button`
   cursor: pointer;
   font-size: 10px;
   width: 50px;
@@ -17,6 +17,10 @@ const Button = styled.button`
   margin-left: 89%;
 `;
 
-export function ResetButton({ onClick }) {
-  return <Button onClick={onClick}>reset</Button>;
+export function ResetButton({ onClick, ...rest }) {
+  return (
+    <Button {...rest} onClick={onClick}>
+      reset
+    </Button>
+  );
 }

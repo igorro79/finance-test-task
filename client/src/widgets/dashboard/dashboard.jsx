@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateData, updateInterval } from '../../redux/finance-slice';
 
 import { SelectInterval } from '../../features/selectInterval';
-import { List } from '../../features/list';
+import { ListComponent } from '../../features/list';
 
 const Section = styled.section`
   width: 80%;
@@ -45,11 +45,11 @@ export const Dashboard = function (props) {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.data);
 
-  socket.once('ticker', (payload) => {
+  socket.on('ticker', (payload) => {
     dispatch(updateData(payload));
   });
 
-  socket.once('interval', (payload) => {
+  socket.on('interval', (payload) => {
     dispatch(updateInterval(payload));
   });
 
@@ -61,7 +61,7 @@ export const Dashboard = function (props) {
           <SelectInterval onChange={handleSelect} />
         </TitleWrapper>
         <Wrapper>
-          <List data={data} />
+          <ListComponent data={data} data-testid="list" />
         </Wrapper>
       </Section>
     )

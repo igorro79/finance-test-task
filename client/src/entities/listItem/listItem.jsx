@@ -100,4 +100,3 @@ export const ListItem = function ({ data, onClick }) {
     </Wrapper>
   );
 };
-
