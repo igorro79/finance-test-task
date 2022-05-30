@@ -43,12 +43,14 @@ const Change = styled(Cell)`
 const ChangePercent = styled(Cell).attrs((props) => ({
   rotate: props.rotate ? '180deg' : '0',
   positive: props.positive,
+  zero: props.zero,
 }))`
   position: relative;
   display: flex;
   align-items: center;
   text-align: right;
   &:before {
+    visibility: ${(props) => (props.zero ? 'hidden' : 'visible')};
     position: absolute;
     content: '';
     width: 16px;
@@ -56,13 +58,25 @@ const ChangePercent = styled(Cell).attrs((props) => ({
     left: -10px;
     top: 6px;
     transform: rotate(${(props) => props.rotate});
-    background-image: url('${arrowUp}');
-    background-color: ${(props) => (props.positive ? '#1ef21b' : '#f70f17')};
+    background-color: ${(props) => (props.positive ? 'green' : 'red')};
     -webkit-mask-image: url('${arrowUp}');
     mask-image: url('${arrowUp}');
   }
 `;
-const ListItem = function ({ data }) {
+const RemoveButton = styled.button`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: red;
+  border: none;
+  color: white;
+`;
+
+export const ListItem = function ({ data, onClick }) {
   return (
     <Wrapper>
       <Company style={{ backgroundColor: generateDarkColorHex() }}>
@@ -71,6 +85,7 @@ const ListItem = function ({ data }) {
       <Price>{data.price} $</Price>
       <Change>{data.change} $</Change>
       <ChangePercent
+        zero={data.change_percent === 0}
         rotate={data.change_percent < 0}
         positive={data.change_percent > 0}
         style={{
@@ -79,18 +94,9 @@ const ListItem = function ({ data }) {
       >
         {data.change_percent} %
       </ChangePercent>
+      <RemoveButton type="button" onClick={() => onClick(data.ticker)}>
+        X
+      </RemoveButton>
     </Wrapper>
   );
 };
-
-export default ListItem;
-//  {
-//       ticker: 'GOOGL',
-//       exchange: 'NASDAQ',
-//       price: '108.44',
-//       change: '75.28',
-//       change_percent: '0.00',
-//       dividend: '0.73',
-//       'yield': '0.09',
-//       last_trade_time: '2022-05-26T12:56:15.000Z'
-//     },
